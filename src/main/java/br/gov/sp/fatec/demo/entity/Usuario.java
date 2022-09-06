@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -30,6 +31,7 @@ public class Usuario {
     @Column(name = "usr_senha")
     private String senha;
 
+    //fetch type é para evitar que ele fique carregando demais, pelo bem do processamento e contra loopings 
     //O Lazy é o mais comum, onde a consulta só é feita quando necessario, no EAGER ela é feita smepre q a p é carregada, o que pode levar a lentidão
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(  // Usado para mapear uma tabela de ligação (só se mapeia de um lado)
@@ -38,6 +40,11 @@ public class Usuario {
         inverseJoinColumns = { @JoinColumn(name = "aut_id")}
     )
     private Set<Autorizacao> autorizacoes;
+
+    //sempre que se tem mapeamento dos dois lados, de um lado temos que bloquear
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario")
+    private Set<Anotacao> anotacoes;
 
     //Gerar getters and setters botão direito, source Action 
     public Long getId() {
@@ -71,4 +78,13 @@ public class Usuario {
     public void setAutorizacoes(Set<Autorizacao> autorizacoes) {
         this.autorizacoes = autorizacoes;
     }
+
+    public Set<Anotacao> getAnotacoes() {
+        return anotacoes;
+    }
+
+    public void setAnotacoes(Set<Anotacao> anotacoes) {
+        this.anotacoes = anotacoes;
+    }
+
 }
