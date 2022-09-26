@@ -1,4 +1,4 @@
-package br.gov.sp.fatec.demo.entity.repository;
+package br.gov.sp.fatec.demo.repository;
 
 import java.util.List;
 
