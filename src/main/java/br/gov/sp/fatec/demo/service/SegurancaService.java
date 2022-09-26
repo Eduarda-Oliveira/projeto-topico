@@ -4,7 +4,9 @@ import java.util.List;
 
 import br.gov.sp.fatec.demo.entity.Usuario;
 
-public interface SegurancaService {
+import org.springframework.security.core.userdetails.UserDetailsService;
+
+public interface SegurancaService extends UserDetailsService {
     
     public Usuario novoUsuario(Usuario usuario);
 
