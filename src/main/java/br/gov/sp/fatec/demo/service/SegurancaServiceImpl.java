@@ -1,3 +1,4 @@
+//Service = responsável por executar as operações de escrita no bd
 package br.gov.sp.fatec.demo.service;
 
 import java.util.HashSet;
@@ -16,7 +17,9 @@ import org.springframework.transaction.annotation.Transactional;
 import br.gov.sp.fatec.demo.entity.Usuario;
 import br.gov.sp.fatec.demo.repository.UsuarioRepository;
 import br.gov.sp.fatec.demo.entity.Autorizacao;
+import br.gov.sp.fatec.demo.entity.Trabalho;
 import br.gov.sp.fatec.demo.repository.AutorizacaoRepository;
+import br.gov.sp.fatec.demo.repository.TrabalhoRepository;
 
 @Service
 public class SegurancaServiceImpl implements SegurancaService{
@@ -27,6 +30,9 @@ public class SegurancaServiceImpl implements SegurancaService{
     //   this.usuarioRepo = usuario(mais alguma coisa que n deu tempo, desculpa)
    // }
     private UsuarioRepository usuarioRepo;
+    @Autowired
+    private TrabalhoRepository trabalhoRepo;
+
 
     @Autowired
     private AutorizacaoRepository autorizacaoRepo;
@@ -89,5 +95,14 @@ public class SegurancaServiceImpl implements SegurancaService{
                 .map(Autorizacao::getNome).collect(Collectors.toList())
                 .toArray(new String[usuario.getAutorizacoes().size()]))
             .build();
+    }
+
+    @Override
+    public List<Trabalho> todosTrabalhos() {
+        return trabalhoRepo.findAll();
+    }
+    @Override
+    public Trabalho findByNotaGreaterThan(int x) {
+        return trabalhoRepo.findByNotaGreaterThan(x);
     }
 }
