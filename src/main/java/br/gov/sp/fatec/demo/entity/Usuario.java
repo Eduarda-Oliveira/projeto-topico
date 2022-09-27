@@ -1,3 +1,4 @@
+//Entity = mapeamento das tabelas do bd em classes
 package br.gov.sp.fatec.demo.entity;
 
 import java.util.Set;
@@ -15,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+//@Entity = demarcar uma entidade no bd
 
 @Entity
 @Table(name = "usr_usuario")

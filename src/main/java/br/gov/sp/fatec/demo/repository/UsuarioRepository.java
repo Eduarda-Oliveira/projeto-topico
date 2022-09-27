@@ -1,3 +1,4 @@
+// Repository = repsonsável por executar as operações de consulta no bd
 package br.gov.sp.fatec.demo.repository;
 
 import java.util.List;
